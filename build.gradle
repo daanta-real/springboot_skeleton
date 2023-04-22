@@ -30,7 +30,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-def webappDir = "$projectDir/frontend"
+def webappDir = "$projectDir/material-dashboard-react-main"
 
 sourceSets {
 	main {
