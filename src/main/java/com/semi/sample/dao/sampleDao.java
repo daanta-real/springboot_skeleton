@@ -10,6 +10,12 @@ import java.util.List;
 @Mapper
 public interface sampleDao {
 
-	List<sampleVO> getSampleList();
+	List<sampleVO> getSampleList(sampleVO sampleVO);
+
+	int sampleInsert(sampleVO sampleVO);
+
+	int sampleUpdate(sampleVO sampleVO);
+
+	int sampleDelete(int id);
 
 }

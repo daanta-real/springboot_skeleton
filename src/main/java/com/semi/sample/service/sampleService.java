@@ -13,10 +13,22 @@ public class sampleService {
     @Autowired
     sampleDao sampleDao;
 
-    public List<sampleVO> getSampleList() {
+    public List<sampleVO> getSampleList(sampleVO sampleVO) {
 
-        List<sampleVO> sampleList = sampleDao.getSampleList();
+        List<sampleVO> sampleList = sampleDao.getSampleList(sampleVO);
 
         return sampleList;
     }
+
+	public int sampleInsert(sampleVO sampleVO) {
+		return sampleDao.sampleInsert(sampleVO);
+	}
+
+	public int sampleUpdate(sampleVO sampleVO) {
+		return sampleDao.sampleUpdate(sampleVO);
+	}
+
+	public int sampleDelete(int id) {
+		return sampleDao.sampleDelete(id);
+	}
 }
