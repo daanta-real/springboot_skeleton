@@ -9,6 +9,7 @@
 	<input type="text" id="xxx" value = "37.39809559577211"><br>
 	<input type="text" id="yyy" value = "127.01761088033732">
 	<input type="button" value="마커추가" onclick="javascript:markerClick();">
+	<input type="button" value="메인으로" onclick="javascript:backSpace();">
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b9a7d7c6593032a6726aa2aaa6003cad"></script>
@@ -37,6 +38,10 @@ function markerClick() {
 	});
 
 	marker.setMap(map);
+}
+
+function backSpace() {
+	location.href = '/index.html';
 }
 </script>
 </html>
