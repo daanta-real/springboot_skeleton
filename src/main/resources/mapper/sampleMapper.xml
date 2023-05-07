@@ -22,9 +22,9 @@
 				, address
 			) VALUES (
 				#{name}
-				#{email}
-				#{phone}
-				#{address}
+				, #{email}
+				, #{phone}
+				, #{address}
 			)
 	</insert>
 	
@@ -33,9 +33,9 @@
 			gold.customer
 		   SET
 			name = #{name}
-			email = #{email}
-			phone = #{phone}
-			address #{address}
+			, email = #{email}
+			, phone = #{phone}
+			, address #{address}
 		 WHERE id = #{id}
 	</update>
 	

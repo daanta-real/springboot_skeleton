@@ -5,10 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +16,6 @@ import com.semi.sample.service.sampleService;
 import com.semi.sample.vo.sampleVO;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @RequestMapping(value="/sample")
@@ -26,7 +24,7 @@ public class sampleController {
     sampleService sempleService;
 	
 	@Operation(summary = "샘플조회", description = "샘플조회")
-    @GetMapping("list")
+    @PostMapping("list")
     public HashMap<String, Object> getSampleList(@RequestBody sampleVO sampleVO ){
         HashMap<String, Object> result = new HashMap<>();
         List<sampleVO> sempleList= sempleService.getSampleList(sampleVO);
@@ -39,13 +37,17 @@ public class sampleController {
     @PostMapping("insert")
     public HashMap<String, Object> sampleInsert(@RequestBody sampleVO sampleVO ){
         HashMap<String, Object> result = new HashMap<>();
-        System.out.println("test" + sampleVO.toString());
+        System.out.println("sampleVO: " + sampleVO.toString());
+        System.out.println("test" + sampleVO.getName());
+        System.out.println("test" + sampleVO.getId());
+        System.out.println("test" + sampleVO.getPhone());
+        System.out.println("test!!" + sampleVO.getEmail());
         int cnt = sempleService.sampleInsert(sampleVO);
         if (cnt > 0) {
-        	result.put("resultMsg", "삭제성공하였습니다.");
+        	result.put("resultMsg", "삽입성공하였습니다.");
         	result.put("resultCode", "0");
         } else {
-        	result.put("resultMsg", "삭제실패하였습니다.");
+        	result.put("resultMsg", "삽입실패하였습니다.");
         	result.put("resultCode", "-1");
         }
         

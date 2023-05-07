@@ -1,27 +1,27 @@
 package com.semi.sample.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-//import io.swagger.annotations.ApiParam;
 import lombok.Data;
 
 @Schema(description = "샘플데이터 VO")
 @Data
 public class sampleVO {
 	
-	@Schema(description = "아이디")
-	private int id;
+    @Schema(description = "아이디")
+    private int id;
+
+    @Schema(description = "이름")
+    private String name;
+
+    @Schema(description = "이메일")
+    private String email;
+
+    @Schema(description = "핸드폰번호")
+    private String phone;
+
+    @Schema(description = "주소")
+    private String address;
 	
-	@Schema(description = "이름")
-    String name;
-	
-	@Schema(description = "이메일")
-    String email;
-	
-	@Schema(description = "핸드폰번호")
-    String phone;
-	
-	@Schema(description = "이메일")
-    String address;
 	public int getId() {
 		return id;
 	}
