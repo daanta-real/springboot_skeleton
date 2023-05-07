@@ -1,0 +1,42 @@
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>kakaoMapTest</title>
+</head>
+<body>
+<h1>카카오맵 마커 테스트</h1>
+	<div id="map" style="width:500px;height:400px;"></div>
+	<input type="text" id="xxx" value = "37.39809559577211"><br>
+	<input type="text" id="yyy" value = "127.01761088033732">
+	<input type="button" value="마커추가" onclick="javascript:markerClick();">
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b9a7d7c6593032a6726aa2aaa6003cad"></script>
+<script>
+	var container = document.getElementById('map');
+	var options = {
+	    center: new kakao.maps.LatLng(37.49809559577211, 127.02761088033732),
+	    level: 3
+	};
+	
+	var map = new kakao.maps.Map(container, options);
+	
+	var markerPosition  = new kakao.maps.LatLng(37.49809559577211, 127.02761088033732); 
+	
+	var marker = new kakao.maps.Marker({
+	    position: markerPosition
+	});
+	
+	marker.setMap(map);
+	
+function markerClick() {
+	var markerPosition  = new kakao.maps.LatLng($("#xxx").val(), $("#yyy").val()); 
+
+	var marker = new kakao.maps.Marker({
+	    position: markerPosition
+	});
+
+	marker.setMap(map);
+}
+</script>
+</html>

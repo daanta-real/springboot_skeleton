@@ -1,0 +1,84 @@
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button" value="swagger(API명세서)" onclick="javascript:moveSwagger();">
+	<input type="button" value="카카오맵테스트" onclick="javascript:kakaomapPage();">
+	<input type="button" value="백앤드호출(샘플)" onclick="javascript:sampleList();">
+	<input type="button" value="모바일체크" onclick="javascript:isMobileButton();">
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function moveSwagger(){
+	location.href = '/swagger-ui/index.html';
+}
+
+function kakaomapPage(){
+	location.href = '/map/map.html';
+}
+
+function sampleList() {
+	  // json 형식으로 데이터 set
+	var params = {
+		    id: 5
+		};
+
+		$.ajax({
+		    type: "POST",
+		    url: "/sample/list",
+		    contentType: "application/json", // Content-Type 헤더 설정
+		    data: JSON.stringify(params),    // JSON 데이터를 문자열로 변환하여 전송
+		    success: function(res) {
+		        console.log(res);
+		    },
+		    error: function(XMLHttpRequest, textStatus, errorThrown) {
+		        alert("통신 실패.");
+		    }
+		});
+}
+
+//모바일 디바이스 여부를 확인하는 함수
+function isMobile() {
+    var mobileKeyWords = ['Android', 'iPhone', 'iPod', 'BlackBerry', 'Windows Phone'];
+    for (var i in mobileKeyWords) {
+        if (navigator.userAgent.match(mobileKeyWords[i]) != null) {
+            return true;
+        }
+    }
+    return false;
+}
+function isMobileButton() {
+	// 모바일 디바이스일 경우와 아닐 경우의 분기 처리
+	if (isMobile()) {
+	    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+	    // 안드로이드 체크
+	    if (userAgent.match(/Android/i)) {
+	        // 안드로이드일 경우 실행할 코드 작성
+	        alert("This is Android mobile device.");
+	    }
+	    // 아이폰 체크
+	    else if (userAgent.match(/iPhone|iPod/i)) {
+	        // 아이폰일 경우 실행할 코드 작성
+	        alert("This is iPhone mobile device.");
+	    }
+	    // 아이패드 체크
+	    else if (userAgent.match(/iPad/i)) {
+	        // 아이패드일 경우 실행할 코드 작성
+	        alert("This is iPad mobile device.");
+	    }
+	    // 기타 모바일 디바이스 체크
+	    else {
+	        // 기타 모바일 디바이스일 경우 실행할 코드 작성
+	        alert("This is other mobile device.");
+	    }
+	} else {
+	    // PC 환경일 경우 실행할 코드 작성
+	    alert("This is PC environment.");
+	}
+}
+
+
+</script>
+</html>
