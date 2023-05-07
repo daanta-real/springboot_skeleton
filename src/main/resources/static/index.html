@@ -1,13 +1,13 @@
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>í…ŒìŠ¤íŠ¸</title>
 </head>
 <body>
-	<input type="button" value="swagger(API¸í¼¼¼­)" onclick="javascript:moveSwagger();">
-	<input type="button" value="Ä«Ä«¿À¸ÊÅ×½ºÆ®" onclick="javascript:kakaomapPage();">
-	<input type="button" value="¹é¾ØµåÈ£Ãâ(»ùÇÃ)" onclick="javascript:sampleList();">
-	<input type="button" value="¸ğ¹ÙÀÏÃ¼Å©" onclick="javascript:isMobileButton();">
+	<input type="button" value="swagger(APIëª…ì„¸ì„œ)" onclick="javascript:moveSwagger();">
+	<input type="button" value="ì¹´ì¹´ì˜¤ë§µí…ŒìŠ¤íŠ¸" onclick="javascript:kakaomapPage();">
+	<input type="button" value="ë°±ì•¤ë“œí˜¸ì¶œ(ìƒ˜í”Œ)" onclick="javascript:sampleList();">
+	<input type="button" value="ëª¨ë°”ì¼ì²´í¬" onclick="javascript:isMobileButton();">
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -20,7 +20,7 @@ function kakaomapPage(){
 }
 
 function sampleList() {
-	  // json Çü½ÄÀ¸·Î µ¥ÀÌÅÍ set
+	  // json í˜•ì‹ìœ¼ë¡œ ë°ì´í„° set
 	var params = {
 		    id: 5
 		};
@@ -28,18 +28,18 @@ function sampleList() {
 		$.ajax({
 		    type: "POST",
 		    url: "/sample/list",
-		    contentType: "application/json", // Content-Type Çì´õ ¼³Á¤
-		    data: JSON.stringify(params),    // JSON µ¥ÀÌÅÍ¸¦ ¹®ÀÚ¿­·Î º¯È¯ÇÏ¿© Àü¼Û
+		    contentType: "application/json", // Content-Type í—¤ë” ì„¤ì •
+		    data: JSON.stringify(params),    // JSON ë°ì´í„°ë¥¼ ë¬¸ìì—´ë¡œ ë³€í™˜í•˜ì—¬ ì „ì†¡
 		    success: function(res) {
 		        console.log(res);
 		    },
 		    error: function(XMLHttpRequest, textStatus, errorThrown) {
-		        alert("Åë½Å ½ÇÆĞ.");
+		        alert("í†µì‹  ì‹¤íŒ¨.");
 		    }
 		});
 }
 
-//¸ğ¹ÙÀÏ µğ¹ÙÀÌ½º ¿©ºÎ¸¦ È®ÀÎÇÏ´Â ÇÔ¼ö
+//ëª¨ë°”ì¼ ë””ë°”ì´ìŠ¤ ì—¬ë¶€ë¥¼ í™•ì¸í•˜ëŠ” í•¨ìˆ˜
 function isMobile() {
     var mobileKeyWords = ['Android', 'iPhone', 'iPod', 'BlackBerry', 'Windows Phone'];
     for (var i in mobileKeyWords) {
@@ -50,31 +50,31 @@ function isMobile() {
     return false;
 }
 function isMobileButton() {
-	// ¸ğ¹ÙÀÏ µğ¹ÙÀÌ½ºÀÏ °æ¿ì¿Í ¾Æ´Ò °æ¿ìÀÇ ºĞ±â Ã³¸®
+	// ëª¨ë°”ì¼ ë””ë°”ì´ìŠ¤ì¼ ê²½ìš°ì™€ ì•„ë‹ ê²½ìš°ì˜ ë¶„ê¸° ì²˜ë¦¬
 	if (isMobile()) {
 	    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-	    // ¾Èµå·ÎÀÌµå Ã¼Å©
+	    // ì•ˆë“œë¡œì´ë“œ ì²´í¬
 	    if (userAgent.match(/Android/i)) {
-	        // ¾Èµå·ÎÀÌµåÀÏ °æ¿ì ½ÇÇàÇÒ ÄÚµå ÀÛ¼º
+	        // ì•ˆë“œë¡œì´ë“œì¼ ê²½ìš° ì‹¤í–‰í•  ì½”ë“œ ì‘ì„±
 	        alert("This is Android mobile device.");
 	    }
-	    // ¾ÆÀÌÆù Ã¼Å©
+	    // ì•„ì´í° ì²´í¬
 	    else if (userAgent.match(/iPhone|iPod/i)) {
-	        // ¾ÆÀÌÆùÀÏ °æ¿ì ½ÇÇàÇÒ ÄÚµå ÀÛ¼º
+	        // ì•„ì´í°ì¼ ê²½ìš° ì‹¤í–‰í•  ì½”ë“œ ì‘ì„±
 	        alert("This is iPhone mobile device.");
 	    }
-	    // ¾ÆÀÌÆĞµå Ã¼Å©
+	    // ì•„ì´íŒ¨ë“œ ì²´í¬
 	    else if (userAgent.match(/iPad/i)) {
-	        // ¾ÆÀÌÆĞµåÀÏ °æ¿ì ½ÇÇàÇÒ ÄÚµå ÀÛ¼º
+	        // ì•„ì´íŒ¨ë“œì¼ ê²½ìš° ì‹¤í–‰í•  ì½”ë“œ ì‘ì„±
 	        alert("This is iPad mobile device.");
 	    }
-	    // ±âÅ¸ ¸ğ¹ÙÀÏ µğ¹ÙÀÌ½º Ã¼Å©
+	    // ê¸°íƒ€ ëª¨ë°”ì¼ ë””ë°”ì´ìŠ¤ ì²´í¬
 	    else {
-	        // ±âÅ¸ ¸ğ¹ÙÀÏ µğ¹ÙÀÌ½ºÀÏ °æ¿ì ½ÇÇàÇÒ ÄÚµå ÀÛ¼º
+	        // ê¸°íƒ€ ëª¨ë°”ì¼ ë””ë°”ì´ìŠ¤ì¼ ê²½ìš° ì‹¤í–‰í•  ì½”ë“œ ì‘ì„±
 	        alert("This is other mobile device.");
 	    }
 	} else {
-	    // PC È¯°æÀÏ °æ¿ì ½ÇÇàÇÒ ÄÚµå ÀÛ¼º
+	    // PC í™˜ê²½ì¼ ê²½ìš° ì‹¤í–‰í•  ì½”ë“œ ì‘ì„±
 	    alert("This is PC environment.");
 	}
 }
