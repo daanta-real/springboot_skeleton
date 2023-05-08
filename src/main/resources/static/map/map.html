@@ -6,8 +6,11 @@
 <body>
 <h1>카카오맵 마커 테스트</h1>
 	<div id="map" style="width:500px;height:400px;"></div>
+	<div id="coordinates"></div>
 	<input type="text" id="xxx" value = "37.39809559577211"><br>
 	<input type="text" id="yyy" value = "127.01761088033732">
+	<input type="button" value="현재위치가져오기(안드로이드위치정보)" onclick="javascript:getCoordinates();">
+	<input type="button" value="현재위치가져오기(브라우저위치정보)" onclick="javascript:getLocation();">
 	<input type="button" value="마커추가" onclick="javascript:markerClick();">
 	<input type="button" value="메인으로" onclick="javascript:backSpace();">
 </body>
@@ -42,6 +45,42 @@ function markerClick() {
 
 function backSpace() {
 	location.href = '/index.html';
+}
+
+function getCoordinates() {
+	// Call getCoordinates method of WebAppInterface
+    var coordinates = window.android.getCoordinates();
+
+    // Check if location is found
+    if (coordinates != "Location not found") {
+        // Split latitude and longitude values
+        var latitude = coordinates.split(";")[0].split("(")[1];
+        var longitude = coordinates.split(";")[1].split(")")[0];
+
+        // Display latitude and longitude
+        document.getElementById("coordinates").innerHTML = "Latitude: " + latitude + "<br>Longitude: " + longitude;
+    } else {
+        // Display error message
+        document.getElementById("coordinates").innerHTML = "Location not found";
+    }
+}
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+
+function showPosition(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+
+    $("#xxx").val(latitude);
+    $("#yyy").val(longitude);
+    // 안드로이드에서 좌표값 가져오기
+//     Android.getCoordinates(latitude, longitude);
 }
 </script>
 </html>
