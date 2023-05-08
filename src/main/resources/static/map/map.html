@@ -58,7 +58,9 @@ function getCoordinates() {
         var longitude = coordinates.split(";")[1].split(")")[0];
 
         // Display latitude and longitude
-        document.getElementById("coordinates").innerHTML = "Latitude: " + latitude + "<br>Longitude: " + longitude;
+//         document.getElementById("coordinates").innerHTML = "Latitude: " + latitude + "<br>Longitude: " + longitude;
+        $("#xxx").val(latitude);
+        $("#yyy").val(longitude);
     } else {
         // Display error message
         document.getElementById("coordinates").innerHTML = "Location not found";
