@@ -50,17 +50,11 @@ function backSpace() {
 function getCoordinates() {
 	// Call getCoordinates method of WebAppInterface
     var coordinates = window.android.getCoordinates();
-
+    
     // Check if location is found
     if (coordinates != "Location not found") {
-        // Split latitude and longitude values
-        var latitude = coordinates.split(";")[0].split("(")[1];
-        var longitude = coordinates.split(";")[1].split(")")[0];
-
-        // Display latitude and longitude
-//         document.getElementById("coordinates").innerHTML = "Latitude: " + latitude + "<br>Longitude: " + longitude;
-        $("#xxx").val(latitude);
-        $("#yyy").val(longitude);
+        $("#xxx").val(coordinates.latitude);
+        $("#yyy").val(coordinates.longitude);
     } else {
         // Display error message
         document.getElementById("coordinates").innerHTML = "Location not found";
