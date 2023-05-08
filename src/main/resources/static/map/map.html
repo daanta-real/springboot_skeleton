@@ -53,8 +53,9 @@ function getCoordinates() {
     
     // Check if location is found
     if (coordinates != "Location not found") {
-        $("#xxx").val(coordinates.latitude);
-        $("#yyy").val(coordinates.longitude);
+		var data = JSON.parse(coordinates);
+        $("#xxx").val(data.latitude);
+        $("#yyy").val(data.longitude);
     } else {
         // Display error message
         document.getElementById("coordinates").innerHTML = "Location not found";
