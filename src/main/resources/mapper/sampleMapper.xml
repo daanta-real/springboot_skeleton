@@ -56,8 +56,8 @@
 	<insert id="gpsInsert" parameterType="com.semi.sample.vo.gpsVO">
 		INSERT INTO gold.gpsinfo
 			(
-				latitude
-				, longitude
+				ABS(latitude) as latitude
+				, ABS(longitude) as longitude
 			) VALUES (
 				#{latitude}
 				, #{longitude}
