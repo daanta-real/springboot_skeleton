@@ -12,7 +12,10 @@
 	<input type="button" value="현재위치가져오기(안드로이드위치정보)" onclick="javascript:getCoordinates();">
 	<input type="button" value="현재위치가져오기(브라우저위치정보)" onclick="javascript:getLocation();">
 	<input type="button" value="마커추가" onclick="javascript:markerClick();">
+	<input type="button" value="백그라운드GPS시작" onclick="javascript:startSendingLocation();">
 	<input type="button" value="메인으로" onclick="javascript:backSpace();">
+	
+	
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b9a7d7c6593032a6726aa2aaa6003cad"></script>
@@ -40,6 +43,12 @@ function markerClick() {
 	    position: markerPosition
 	});
 
+	// 이동할 위도 경도 위치를 생성합니다 
+    var moveLatLon = new kakao.maps.LatLng($("#xxx").val(), $("#yyy").val());
+    
+    // 지도 중심을 이동 시킵니다
+    map.setCenter(moveLatLon);
+    
 	marker.setMap(map);
 }
 
@@ -50,7 +59,7 @@ function backSpace() {
 function getCoordinates() {
 	// Call getCoordinates method of WebAppInterface
     var coordinates = window.android.getCoordinates();
-    
+	
     // Check if location is found
     if (coordinates != "Location not found") {
 		var data = JSON.parse(coordinates);
@@ -78,6 +87,11 @@ function showPosition(position) {
     $("#yyy").val(longitude);
     // 안드로이드에서 좌표값 가져오기
 //     Android.getCoordinates(latitude, longitude);
+}
+
+function startSendingLocation(){
+	// 백그라운드 GPS정보 가져오기 실행
+    window.android.startSendingLocation("https://port-0-testsample-e9btb72blgiy226y.sel3.cloudtype.app/sample/insert");
 }
 </script>
 </html>
