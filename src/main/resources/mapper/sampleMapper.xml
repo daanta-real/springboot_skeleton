@@ -45,8 +45,8 @@
 
 	<select id="getGpsLastInfo" resultType="com.semi.sample.vo.gpsVO">
 		SELECT 
-			ABS(latitude) as latitude
-			, ABS(longitude) as longitude
+			 latitude
+			, longitude
 		FROM
 			gold.gpsinfo
 		ORDER BY ID DESC
