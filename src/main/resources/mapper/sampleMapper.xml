@@ -45,19 +45,19 @@
 
 	<select id="getGpsLastInfo" resultType="com.semi.sample.vo.gpsVO">
 		SELECT 
-			latitude
-			, longitude
+			ABS(latitude) as latitude
+			, ABS(longitude) as longitude
 		FROM
 			gold.gpsinfo
-		ORDER BY 1 DESC
+		ORDER BY ID DESC
 		LIMIT 1
 	</select>
 	
 	<insert id="gpsInsert" parameterType="com.semi.sample.vo.gpsVO">
 		INSERT INTO gold.gpsinfo
 			(
-				ABS(latitude) as latitude
-				, ABS(longitude) as longitude
+				latitude
+				, longitude
 			) VALUES (
 				#{latitude}
 				, #{longitude}
