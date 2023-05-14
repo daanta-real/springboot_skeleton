@@ -43,4 +43,24 @@
 		DELETE FROM gold.customer WHERE id = #{id}
 	</delete>
 
+	<select id="getGpsLastInfo" resultType="com.semi.sample.vo.gpsVO">
+		SELECT 
+			latitude
+			, longitude
+		FROM
+			gold.gpsinfo
+		ORDER BY 1 DESC
+		LIMIT 1
+	</select>
+	
+	<insert id="gpsInsert" parameterType="com.semi.sample.vo.gpsVO">
+		INSERT INTO gold.gpsinfo
+			(
+				latitude
+				, longitude
+			) VALUES (
+				#{latitude}
+				, #{longitude}
+			)
+	</insert>
 </mapper>

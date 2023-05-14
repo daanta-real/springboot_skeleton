@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.semi.sample.service.sampleService;
 import com.semi.sample.vo.sampleVO;
+import com.semi.sample.vo.gpsVO;
 
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -37,11 +38,6 @@ public class sampleController {
     @PostMapping("insert")
     public HashMap<String, Object> sampleInsert(@RequestBody sampleVO sampleVO ){
         HashMap<String, Object> result = new HashMap<>();
-        System.out.println("sampleVO: " + sampleVO.toString());
-        System.out.println("test" + sampleVO.getName());
-        System.out.println("test" + sampleVO.getId());
-        System.out.println("test" + sampleVO.getPhone());
-        System.out.println("test!!" + sampleVO.getEmail());
         int cnt = sempleService.sampleInsert(sampleVO);
         if (cnt > 0) {
         	result.put("resultMsg", "삽입성공하였습니다.");
@@ -50,7 +46,6 @@ public class sampleController {
         	result.put("resultMsg", "삽입실패하였습니다.");
         	result.put("resultCode", "-1");
         }
-        
 
         return result;
     }
@@ -82,6 +77,31 @@ public class sampleController {
         	result.put("resultMsg", "삭제실패하였습니다.");
         	result.put("resultCode", "-1");
         }
+        return result;
+    }
+	
+	@Operation(summary = "GPS정보 마지막정보 불러오기", description = "GPS정보 마지막정보 불러오기")
+    @PostMapping("getGps")
+    public gpsVO getGpsLastInfo(@RequestBody gpsVO gpsVO ){
+        HashMap<String, Object> result = new HashMap<>();
+        gpsVO gpsInfo = new gpsVO();
+        gpsInfo= sempleService.getGpsLastInfo();
+        return gpsInfo;
+    }
+	
+	@Operation(summary = "GPS정보 집어넣기", description = "GPS정보 넣기")
+    @PostMapping("gpsInsert")
+    public HashMap<String, Object> gpsInsert(@RequestBody gpsVO gpsVO ){
+        HashMap<String, Object> result = new HashMap<>();
+        int cnt = sempleService.gpsInsert(gpsVO);
+        if (cnt > 0) {
+        	result.put("resultMsg", "삽입성공하였습니다.");
+        	result.put("resultCode", "0");
+        } else {
+        	result.put("resultMsg", "삽입실패하였습니다.");
+        	result.put("resultCode", "-1");
+        }
+
         return result;
     }
 	

@@ -3,6 +3,7 @@ package com.semi.sample.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.semi.sample.dao.sampleDao;
+import com.semi.sample.vo.gpsVO;
 import com.semi.sample.vo.sampleVO;
 
 import java.util.List;
@@ -30,5 +31,13 @@ public class sampleService {
 
 	public int sampleDelete(int id) {
 		return sampleDao.sampleDelete(id);
+	}
+
+	public int gpsInsert(gpsVO gpsVO) {
+		return sampleDao.gpsInsert(gpsVO);
+	}
+
+	public gpsVO getGpsLastInfo() {
+		return sampleDao.getGpsLastInfo();
 	}
 }

@@ -12,6 +12,9 @@
 	<input type="button" value="현재위치가져오기(안드로이드위치정보)" onclick="javascript:getCoordinates();">
 	<input type="button" value="현재위치가져오기(브라우저위치정보)" onclick="javascript:getLocation();">
 	<input type="button" value="마커추가" onclick="javascript:markerClick();">
+	
+	<input type="button" value="마지막GPS정보가져오기" onclick="javascript:getGpsInfo();">
+	
 	<input type="button" value="백그라운드GPS시작" onclick="javascript:startSendingLocation();">
 	<input type="button" value="메인으로" onclick="javascript:backSpace();">
 	
@@ -91,7 +94,27 @@ function showPosition(position) {
 
 function startSendingLocation(){
 	// 백그라운드 GPS정보 가져오기 실행
-    window.android.startSendingLocation("https://port-0-testsample-e9btb72blgiy226y.sel3.cloudtype.app/sample/insert");
+    window.android.startSendingLocation("https://port-0-testsample-e9btb72blgiy226y.sel3.cloudtype.app/sample/gpsInsert");
+}
+
+function getGpsInfo() {
+		$.ajax({
+		    type: "POST",
+		    url: "/sample/getGps",
+		    contentType: "application/json", // Content-Type 헤더 설정
+		    data: JSON.stringify(params),    // JSON 데이터를 문자열로 변환하여 전송
+		    success: function(res) {
+		    	
+		        var latitude = res.latitude;
+		        var longitude = res.longitude;
+
+		        $("#xxx").val(latitude);
+		        $("#yyy").val(longitude);
+		    },
+		    error: function(XMLHttpRequest, textStatus, errorThrown) {
+		        alert("통신 실패.");
+		    }
+		});
 }
 </script>
 </html>

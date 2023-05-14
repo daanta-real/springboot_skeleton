@@ -2,6 +2,8 @@ package com.semi.sample.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+
+import com.semi.sample.vo.gpsVO;
 import com.semi.sample.vo.sampleVO;
 
 import java.util.List;
@@ -17,5 +19,9 @@ public interface sampleDao {
 	int sampleUpdate(sampleVO sampleVO);
 
 	int sampleDelete(int id);
+
+	int gpsInsert(gpsVO gpsVO);
+
+	gpsVO getGpsLastInfo();
 
 }
