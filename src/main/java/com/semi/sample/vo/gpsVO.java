@@ -8,26 +8,26 @@ import lombok.Data;
 public class gpsVO {
 	
     @Schema(description = "X좌표")
-    private String latitude;
+    private Long latitude;
 
     @Schema(description = "Y좌표")
-    private String longitude;
+    private Long longitude;
 
-	public String getLatitude() {
+	public Long getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(String latitude) {
+	public void setLatitude(Long latitude) {
 		this.latitude = latitude;
 	}
 
-	public String getLongitude() {
+	public Long getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(String longitude) {
+	public void setLongitude(Long longitude) {
 		this.longitude = longitude;
 	}
-    
+
     
 }
