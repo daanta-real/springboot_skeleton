@@ -16,6 +16,7 @@
 	<input type="button" value="마지막GPS정보가져오기" onclick="javascript:getGpsInfo();">
 	
 	<input type="button" value="백그라운드GPS시작" onclick="javascript:startSendingLocation();">
+	<input type="button" value="백그라운드GPS중지" onclick="javascript:stopSendingLocation();">4
 	<input type="button" value="메인으로" onclick="javascript:backSpace();">
 	
 	
@@ -95,6 +96,11 @@ function showPosition(position) {
 function startSendingLocation(){
 	// 백그라운드 GPS정보 가져오기 실행
     window.android.startSendingLocation("https://port-0-testsample-e9btb72blgiy226y.sel3.cloudtype.app/sample/gpsInsert");
+}
+
+function stopSendingLocation(){
+	// 백그라운드 GPS정보 가져오기 중지
+    window.android.stopSendingLocation();
 }
 
 function getGpsInfo() {
