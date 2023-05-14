@@ -108,7 +108,6 @@ function getGpsInfo() {
 		    type: "POST",
 		    url: "/sample/getGps",
 		    contentType: "application/json", // Content-Type 헤더 설정
-		    data: JSON.stringify(params),    // JSON 데이터를 문자열로 변환하여 전송
 		    success: function(res) {
 		    	
 		        var latitude = res.latitude;
