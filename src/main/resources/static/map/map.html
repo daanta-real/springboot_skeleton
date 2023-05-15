@@ -7,9 +7,9 @@
 	<h1>카카오맵 마커 테스트(내위치정보다)</h1>
 	<div id="map" style="width: 500px; height: 400px;"></div>
 	<div id="coordinates"></div>
-	<input type="text" id="xxx" value="37.39809559577211">
+	<input type="hidden" id="xxx" value="37.39809559577211">
 	<br>
-	<input type="text" id="yyy" value="127.01761088033732">
+	<input type="hidden" id="yyy" value="127.01761088033732">
 	<!-- 	<input type="button" value="현재위치가져오기(안드로이드위치정보)" onclick="javascript:getCoordinates();"> -->
 	<!-- 	<input type="button" value="현재위치가져오기(브라우저위치정보)" onclick="javascript:getLocation();"> -->
 	<!-- 	<input type="button" value="마커추가" onclick="javascript:markerClick();"> -->
@@ -19,10 +19,10 @@
 	<!-- 	<input type="button" value="백그라운드GPS시작" onclick="javascript:startSendingLocation();"> -->
 	<!-- 	<input type="button" value="백그라운드GPS중지" onclick="javascript:stopSendingLocation();">4 -->
 	<!-- 	<input type="button" value="메인으로" onclick="javascript:backSpace();"> -->
-실시간정보가져오기를 누르는 순간부터(내가 앱 실행시키면 계속 가져옴)
-<input type="button" value="실시간정보가져오기" onclick="javascript:start();">
-<input type="button" value="실시간정보중지" onclick="javascript:stop();">
 
+<input type="button" value="실시간정보가져오기" onclick="javascript:start();">
+<input type="button" value="실시간정보중지" onclick="javascript:stop();"><br>
+실시간정보가져오기를 누르는 순간부터(내가 앱 실행시키면 계속 가져옴)
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript"
