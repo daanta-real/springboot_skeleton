@@ -4,122 +4,156 @@
 <title>kakaoMapTest</title>
 </head>
 <body>
-<h1>카카오맵 마커 테스트</h1>
-	<div id="map" style="width:500px;height:400px;"></div>
+	<h1>카카오맵 마커 테스트(내위치정보다)</h1>
+	<div id="map" style="width: 500px; height: 400px;"></div>
 	<div id="coordinates"></div>
-	<input type="text" id="xxx" value = "37.39809559577211"><br>
-	<input type="text" id="yyy" value = "127.01761088033732">
-	<input type="button" value="현재위치가져오기(안드로이드위치정보)" onclick="javascript:getCoordinates();">
-	<input type="button" value="현재위치가져오기(브라우저위치정보)" onclick="javascript:getLocation();">
-	<input type="button" value="마커추가" onclick="javascript:markerClick();">
-	
-	<input type="button" value="마지막GPS정보가져오기" onclick="javascript:getGpsInfo();">
-	
-	<input type="button" value="백그라운드GPS시작" onclick="javascript:startSendingLocation();">
-	<input type="button" value="백그라운드GPS중지" onclick="javascript:stopSendingLocation();">4
-	<input type="button" value="메인으로" onclick="javascript:backSpace();">
-	
-	
+	<input type="text" id="xxx" value="37.39809559577211">
+	<br>
+	<input type="text" id="yyy" value="127.01761088033732">
+	<!-- 	<input type="button" value="현재위치가져오기(안드로이드위치정보)" onclick="javascript:getCoordinates();"> -->
+	<!-- 	<input type="button" value="현재위치가져오기(브라우저위치정보)" onclick="javascript:getLocation();"> -->
+	<!-- 	<input type="button" value="마커추가" onclick="javascript:markerClick();"> -->
+
+	<!-- 	<input type="button" value="마지막GPS정보가져오기" onclick="javascript:getGpsInfo();"> -->
+
+	<!-- 	<input type="button" value="백그라운드GPS시작" onclick="javascript:startSendingLocation();"> -->
+	<!-- 	<input type="button" value="백그라운드GPS중지" onclick="javascript:stopSendingLocation();">4 -->
+	<!-- 	<input type="button" value="메인으로" onclick="javascript:backSpace();"> -->
+실시간정보가져오기를 누르는 순간부터(내가 앱 실행시키면 계속 가져옴)
+<input type="button" value="실시간정보가져오기" onclick="javascript:start();">
+<input type="button" value="실시간정보중지" onclick="javascript:stop();">
+
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b9a7d7c6593032a6726aa2aaa6003cad"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b9a7d7c6593032a6726aa2aaa6003cad"></script>
 <script>
+	getGpsInfo();
+
 	var container = document.getElementById('map');
 	var options = {
-	    center: new kakao.maps.LatLng(37.49809559577211, 127.02761088033732),
-	    level: 3
+		center : new kakao.maps.LatLng($("#xxx").val(), $("#yyy").val()),
+		level : 3
 	};
-	
+
 	var map = new kakao.maps.Map(container, options);
-	
-	var markerPosition  = new kakao.maps.LatLng(37.49809559577211, 127.02761088033732); 
-	
-	var marker = new kakao.maps.Marker({
-	    position: markerPosition
-	});
-	
-	marker.setMap(map);
-	
-function markerClick() {
-	var markerPosition  = new kakao.maps.LatLng($("#xxx").val(), $("#yyy").val()); 
+
+	var markerPosition = new kakao.maps.LatLng($("#xxx").val(), $("#yyy").val());
 
 	var marker = new kakao.maps.Marker({
-	    position: markerPosition
+		position : markerPosition
 	});
 
-	// 이동할 위도 경도 위치를 생성합니다 
-    var moveLatLon = new kakao.maps.LatLng($("#xxx").val(), $("#yyy").val());
-    
-    // 지도 중심을 이동 시킵니다
-    map.setCenter(moveLatLon);
-    
 	marker.setMap(map);
-}
 
-function backSpace() {
-	location.href = '/index.html';
-}
+	function markerClick() {
+		var markerPosition = new kakao.maps.LatLng($("#xxx").val(), $("#yyy")
+				.val());
 
-function getCoordinates() {
-	// Call getCoordinates method of WebAppInterface
-    var coordinates = window.android.getCoordinates();
-	
-    // Check if location is found
-    if (coordinates != "Location not found") {
-		var data = JSON.parse(coordinates);
-        $("#xxx").val(data.latitude);
-        $("#yyy").val(data.longitude);
-    } else {
-        // Display error message
-        document.getElementById("coordinates").innerHTML = "Location not found";
-    }
-}
-
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        alert("Geolocation is not supported by this browser.");
-    }
-}
-
-function showPosition(position) {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
-
-    $("#xxx").val(latitude);
-    $("#yyy").val(longitude);
-    // 안드로이드에서 좌표값 가져오기
-//     Android.getCoordinates(latitude, longitude);
-}
-
-function startSendingLocation(){
-	// 백그라운드 GPS정보 가져오기 실행
-    window.android.startSendingLocation("https://port-0-testsample-e9btb72blgiy226y.sel3.cloudtype.app/sample/gpsInsert");
-}
-
-function stopSendingLocation(){
-	// 백그라운드 GPS정보 가져오기 중지
-    window.android.stopSendingLocation();
-}
-
-function getGpsInfo() {
-		$.ajax({
-		    type: "POST",
-		    url: "/sample/getGps",
-		    contentType: "application/json", // Content-Type 헤더 설정
-		    success: function(res) {
-		    	
-		        var latitude = res.latitude;
-		        var longitude = res.longitude;
-
-		        $("#xxx").val(latitude);
-		        $("#yyy").val(longitude);
-		    },
-		    error: function(XMLHttpRequest, textStatus, errorThrown) {
-		        alert("통신 실패.");
-		    }
+		var marker = new kakao.maps.Marker({
+			position : markerPosition
 		});
-}
+
+		// 이동할 위도 경도 위치를 생성합니다 
+		var moveLatLon = new kakao.maps.LatLng($("#xxx").val(), $("#yyy").val());
+
+		// 지도 중심을 이동 시킵니다
+		map.setCenter(moveLatLon);
+
+		marker.setMap(map);
+	}
+
+	function backSpace() {
+		location.href = '/index.html';
+	}
+
+	function getCoordinates() {
+		// Call getCoordinates method of WebAppInterface
+		var coordinates = window.android.getCoordinates();
+
+		// Check if location is found
+		if (coordinates != "Location not found") {
+			var data = JSON.parse(coordinates);
+			$("#xxx").val(data.latitude);
+			$("#yyy").val(data.longitude);
+		} else {
+			// Display error message
+			document.getElementById("coordinates").innerHTML = "Location not found";
+		}
+	}
+
+	function getLocation() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(showPosition);
+		} else {
+			alert("Geolocation is not supported by this browser.");
+		}
+	}
+
+	function showPosition(position) {
+		var latitude = position.coords.latitude;
+		var longitude = position.coords.longitude;
+
+		$("#xxx").val(latitude);
+		$("#yyy").val(longitude);
+		// 안드로이드에서 좌표값 가져오기
+		//     Android.getCoordinates(latitude, longitude);
+	}
+
+	function startSendingLocation() {
+		// 백그라운드 GPS정보 가져오기 실행
+		window.android
+				.startSendingLocation("https://port-0-testsample-e9btb72blgiy226y.sel3.cloudtype.app/sample/gpsInsert");
+	}
+
+	function stopSendingLocation() {
+		// 백그라운드 GPS정보 가져오기 중지
+		window.android.stopSendingLocation();
+	}
+
+	function start(){
+		var interval = setInterval(function() {
+			getGpsInfo();
+			
+			var markerPosition = new kakao.maps.LatLng($("#xxx").val(), $("#yyy")
+					.val());
+
+			var marker = new kakao.maps.Marker({
+				position : markerPosition
+			});
+
+			// 이동할 위도 경도 위치를 생성합니다 
+			var moveLatLon = new kakao.maps.LatLng($("#xxx").val(), $("#yyy").val());
+
+			// 지도 중심을 이동 시킵니다
+			map.setCenter(moveLatLon);
+			marker.setMap(null);
+			marker.setMap(map);
+		}, 10000);
+	}
+	function stop(){
+	  clearInterval(interval);
+	}
+	
+	
+	function getGpsInfo() {
+		$.ajax({
+			type : "POST",
+			url : "/sample/getGps",
+			async : false,
+			contentType : "application/json", // Content-Type 헤더 설정
+			success : function(res) {
+
+				var latitude = res.latitude;
+				var longitude = res.longitude;
+
+				$("#xxx").val(latitude);
+				$("#yyy").val(longitude);
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("통신 실패.");
+			}
+		});
+	}
 </script>
 </html>
