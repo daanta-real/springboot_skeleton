@@ -137,14 +137,17 @@
 	
 	
 	function getGpsInfo() {
-		var data = {
+		let data = {
 			userId : $("#userId").val()
 		}
+
+		var sendData = JSON.stringify(data);
+		
 		$.ajax({
 			type : "POST",
 			url : "/sample/getGps",
 			async : false,
-			data : data,
+			data : sendData,
 			contentType : "application/json", // Content-Type 헤더 설정
 			success : function(res) {
 
