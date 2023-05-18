@@ -22,6 +22,6 @@ public interface sampleDao {
 
 	int gpsInsert(gpsVO gpsVO);
 
-	gpsVO getGpsLastInfo();
+	gpsVO getGpsLastInfo(gpsVO gpsVO);
 
 }

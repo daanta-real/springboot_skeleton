@@ -49,6 +49,7 @@
 			, longitude
 		FROM
 			gold.gpsinfo
+		WHERE userId = #{userId}
 		ORDER BY ID DESC
 		LIMIT 1
 	</select>
@@ -58,9 +59,11 @@
 			(
 				latitude
 				, longitude
+				, userId
 			) VALUES (
 				#{latitude}
 				, #{longitude}
+				, #{userId}
 			)
 	</insert>
 </mapper>

@@ -13,6 +13,18 @@ public class gpsVO {
     @Schema(description = "Y좌표")
     private String longitude;
 
+    @Schema(description = "userId")
+    private String userId;
+
+    
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	public String getLatitude() {
 		return latitude;
 	}

@@ -20,9 +20,11 @@
 	<!-- 	<input type="button" value="백그라운드GPS중지" onclick="javascript:stopSendingLocation();">4 -->
 	<!-- 	<input type="button" value="메인으로" onclick="javascript:backSpace();"> -->
 
-<input type="button" value="실시간정보가져오기" onclick="javascript:start();">
-<input type="button" value="실시간정보중지" onclick="javascript:stop();"><br>
-실시간정보가져오기를 누르는 순간부터(내가 앱 실행시키면 계속 가져옴)
+<input type="text" value ="testId" id="userId" name="userId" /><br />
+<input type="button" value ="실시간GPS정보넣기시작" onclick="javascript:getUserId();"  /><br />
+<input type="button" value="실시간정보지도에찍기" onclick="javascript:start();"><br />
+<input type="button" value="실시간정보중지" onclick="javascript:stop();"><br />
+
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript"
@@ -82,51 +84,49 @@
 		}
 	}
 
-	function getLocation() {
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(showPosition);
-		} else {
-			alert("Geolocation is not supported by this browser.");
-		}
-	}
+// 	function getLocation() {
+// 		if (navigator.geolocation) {
+// 			navigator.geolocation.getCurrentPosition(showPosition);
+// 		} else {
+// 			alert("Geolocation is not supported by this browser.");
+// 		}
+// 	}
 
-	function showPosition(position) {
-		var latitude = position.coords.latitude;
-		var longitude = position.coords.longitude;
+// 	function showPosition(position) {
+// 		var latitude = position.coords.latitude;
+// 		var longitude = position.coords.longitude;
 
-		$("#xxx").val(latitude);
-		$("#yyy").val(longitude);
-		// 안드로이드에서 좌표값 가져오기
-		//     Android.getCoordinates(latitude, longitude);
-	}
+// 		$("#xxx").val(latitude);
+// 		$("#yyy").val(longitude);
+// 		// 안드로이드에서 좌표값 가져오기
+// 		//     Android.getCoordinates(latitude, longitude);
+// 	}
 
-	function startSendingLocation() {
-		// 백그라운드 GPS정보 가져오기 실행
-		window.android
-				.startSendingLocation("https://port-0-testsample-e9btb72blgiy226y.sel3.cloudtype.app/sample/gpsInsert");
-	}
+// 	function startSendingLocation() {
+// 		// 백그라운드 GPS정보 가져오기 실행
+// 		window.android.startSendingLocation("https://port-0-testsample-e9btb72blgiy226y.sel3.cloudtype.app/sample/gpsInsert");
+// 	}
 
-	function stopSendingLocation() {
-		// 백그라운드 GPS정보 가져오기 중지
-		window.android.stopSendingLocation();
-	}
+// 	function stopSendingLocation() {
+// 		// 백그라운드 GPS정보 가져오기 중지
+// 		window.android.stopSendingLocation();
+// 	}
 
 	function start(){
 		var interval = setInterval(function() {
 			getGpsInfo();
 			
-			var markerPosition = new kakao.maps.LatLng($("#xxx").val(), $("#yyy")
-					.val());
+			var markerPosition = new kakao.maps.LatLng($("#xxx").val(), $("#yyy").val());
 
 			var marker = new kakao.maps.Marker({
 				position : markerPosition
 			});
 
 			// 이동할 위도 경도 위치를 생성합니다 
-			var moveLatLon = new kakao.maps.LatLng($("#xxx").val(), $("#yyy").val());
+// 			var moveLatLon = new kakao.maps.LatLng($("#xxx").val(), $("#yyy").val());
 
 			// 지도 중심을 이동 시킵니다
-			map.setCenter(moveLatLon);
+			map.setCenter(markerPosition);
 			marker.setMap(null);
 			marker.setMap(map);
 		}, 10000);
@@ -137,10 +137,14 @@
 	
 	
 	function getGpsInfo() {
+		var data = {
+			userId : $("userId").val()
+		}
 		$.ajax({
 			type : "POST",
 			url : "/sample/getGps",
 			async : false,
+			data : data,
 			contentType : "application/json", // Content-Type 헤더 설정
 			success : function(res) {
 
@@ -154,6 +158,11 @@
 				alert("통신 실패.");
 			}
 		});
+	}
+	
+	function getUserId(){
+		var loginId = $("userId").val();
+		AndroidInterface.onLoginIdReceived(loginId);
 	}
 </script>
 </html>

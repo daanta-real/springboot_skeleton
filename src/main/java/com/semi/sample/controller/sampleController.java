@@ -82,9 +82,9 @@ public class sampleController {
 	
 	@Operation(summary = "GPS정보 마지막정보 불러오기", description = "GPS정보 마지막정보 불러오기")
     @PostMapping("getGps")
-    public gpsVO getGpsLastInfo(){
+    public gpsVO getGpsLastInfo(@RequestBody gpsVO gpsVO){
         gpsVO gpsInfo = new gpsVO();
-        gpsInfo= sempleService.getGpsLastInfo();
+        gpsInfo= sempleService.getGpsLastInfo(gpsVO);
         return gpsInfo;
     }
 	

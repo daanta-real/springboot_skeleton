@@ -37,7 +37,7 @@ public class sampleService {
 		return sampleDao.gpsInsert(gpsVO);
 	}
 
-	public gpsVO getGpsLastInfo() {
-		return sampleDao.getGpsLastInfo();
+	public gpsVO getGpsLastInfo(gpsVO gpsVO) {
+		return sampleDao.getGpsLastInfo(gpsVO);
 	}
 }
