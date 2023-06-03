@@ -21,9 +21,11 @@
 	<!-- 	<input type="button" value="메인으로" onclick="javascript:backSpace();"> -->
 
 <input type="text" value ="0d970029f88082ab" id="userId" name="userId" /><br />
-<input type="button" value ="실시간GPS정보넣기시작" onclick="javascript:getUserId();"  /><br />
-<input type="button" value="실시간정보지도에찍기" onclick="javascript:start();"><br />
-<input type="button" value="실시간정보중지" onclick="javascript:stop();"><br />
+<input type="button" value ="옥수위치" onclick="javascript:memId();"  /><br />
+<input type="button" value ="지혜위치" onclick="javascript:womemId();"  /><br />
+<!-- <input type="button" value ="실시간GPS정보넣기시작" onclick="javascript:getUserId();"  /><br /> -->
+<!-- <input type="button" value="실시간정보지도에찍기" onclick="javascript:start();"><br /> -->
+<!-- <input type="button" value="실시간정보중지" onclick="javascript:stop();"><br /> -->
 
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -31,7 +33,7 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b9a7d7c6593032a6726aa2aaa6003cad"></script>
 <script>
 	getGpsInfo();
-
+	start();
 	var container = document.getElementById('map');
 	var options = {
 		center : new kakao.maps.LatLng($("#xxx").val(), $("#yyy").val()),
@@ -163,9 +165,13 @@
 		});
 	}
 	
-	function getUserId(){
-		var loginId = $("#userId").val();
-		AndroidInterface.onLoginIdReceived(loginId);
+	function memId(){
+		$("#userId").val("0d970029f88082ab");
+	}
+	
+	function womemId(){
+		$("#userId").val("0aef7cc5d46e8c5d");
+		
 	}
 </script>
 </html>
