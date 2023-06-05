@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>회원가입</title>
+</head>
+<body>
+	<input type="text" id="name"/><br/>
+	<input type="text" id="email"/><br/>
+	<input type="text" id="phone"/><br/>
+	<input type="text" id="address"/><br/>
+	<input type="button" onclick="javascript:userSignUp()"/><br/>
+</body>
+<script>
+function userSignUp() {
+	let data = {
+		name : $("#name").val(),
+		email : $("#email").val(),
+		phone : $("#phone").val(),
+		address : $("#address").val()
+	}
+
+	var sendData = JSON.stringify(data);
+	
+	$.ajax({
+		type : "POST",
+		url : "/sample/insert",
+		async : false,
+		data : sendData,
+		contentType : "application/json", // Content-Type 헤더 설정
+		success : function(res) {
+			if (res.resultCode == "0") {
+				alert(res.resultMsg + "\n로그인페이지로 이동합니다.");
+				location.href = '/user/login.html';
+			} else {
+				alert(res.resultMsg);
+			}
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			alert("통신 실패.");
+		}
+	});
+}
+
+</script>
+</html>

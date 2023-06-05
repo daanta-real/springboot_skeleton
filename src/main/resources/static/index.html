@@ -5,12 +5,17 @@
 </head>
 <body>
 	<input type="button" value="swagger(API명세서)" onclick="javascript:moveSwagger();">
+	<input type="button" value="로그인페이지" onclick="javascript:loginPageMove();">
 	<input type="button" value="카카오맵테스트" onclick="javascript:kakaomapPage();">
 	<input type="button" value="백앤드호출(샘플)" onclick="javascript:sampleList();">
 	<input type="button" value="모바일체크" onclick="javascript:isMobileButton();">
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+function loginPageMove(){
+	location.href = '/user/login.html';
+}
+
 function moveSwagger(){
 	location.href = '/swagger-ui/index.html';
 }

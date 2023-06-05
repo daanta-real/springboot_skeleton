@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>로그인</title>
+</head>
+<body>
+	<input type="text" name="id" id="id" /> <br/>
+	<input type="password" name="pw" id="pw" /> <br/> 
+	
+	<input type="button" value="회원가입" onclick="javascript:login();">
+	<input type="button" value="회원가입" onclick="javascript:signUp();">
+</body>
+<script>
+
+function login(){
+	location.href = '/user/userSignUp.html';
+}
+
+function signUp(){
+	location.href = '/user/userSignUp.html';
+}
+
+
+</script>
+</html>
