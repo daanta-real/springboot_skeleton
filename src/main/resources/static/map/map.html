@@ -32,27 +32,16 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b9a7d7c6593032a6726aa2aaa6003cad"></script>
 <script>
-	getGpsInfo();
 	start();
-	var container = document.getElementById('map');
-	var options = {
-		center : new kakao.maps.LatLng($("#xxx").val(), $("#yyy").val()),
-		level : 3
-	};
-
-	var map = new kakao.maps.Map(container, options);
-
+	
 	var markerPosition = new kakao.maps.LatLng($("#xxx").val(), $("#yyy").val());
 
 	var marker = new kakao.maps.Marker({
 		position : markerPosition
 	});
-
-	marker.setMap(map);
-
+	
 	function markerClick() {
-		var markerPosition = new kakao.maps.LatLng($("#xxx").val(), $("#yyy")
-				.val());
+		var markerPosition = new kakao.maps.LatLng($("#xxx").val(), $("#yyy").val());
 
 		var marker = new kakao.maps.Marker({
 			position : markerPosition
@@ -120,7 +109,7 @@
 			
 			var markerPosition = new kakao.maps.LatLng($("#xxx").val(), $("#yyy").val());
 
-			var marker = new kakao.maps.Marker({
+			marker = new kakao.maps.Marker({
 				position : markerPosition
 			});
 
@@ -129,8 +118,9 @@
 
 			// 지도 중심을 이동 시킵니다
 			map.setCenter(markerPosition);
+			console.log(markerPosition);
 			marker.setMap(null);
-			marker.setMap(map);
+// 			marker.setMap(map);
 		}, 10000);
 	}
 	function stop(){
