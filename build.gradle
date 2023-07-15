@@ -1,7 +1,7 @@
 plugins {
 	id 'java'
 	id 'war'
-	id 'org.springframework.boot' version '3.0.8-SNAPSHOT'
+	id 'org.springframework.boot' version '3.1.1'
 	id 'io.spring.dependency-management' version '1.1.0'
 }
 
@@ -9,11 +9,12 @@ group = 'com.daanta'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '20'
 
-
 repositories {
 	mavenCentral()
 	maven { url 'https://repo.spring.io/milestone' }
 	maven { url 'https://repo.spring.io/snapshot' }
+	maven { url "https://plugins.gradle.org/m2/" }
+	gradlePluginPortal()
 }
 
 dependencies {
@@ -78,7 +79,6 @@ dependencies {
 	compileOnly 'javax.servlet:javax.servlet-api:3.1.0'
 
 }
-
 
 tasks.named('test') {
 	useJUnitPlatform()
