@@ -60,6 +60,12 @@ dependencies {
 	annotationProcessor "org.projectlombok:lombok:1.18.28"
 	testAnnotationProcessor "org.projectlombok:lombok:1.18.28"
 
+	// XSS 공격을 방어하기 위한 LUXY XSS 서블릿
+	// https://mvnrepository.com/artifact/com.navercorp.lucy/lucy-xss-servlet
+	// https://mvnrepository.com/artifact/com.navercorp.lucy/lucy-xss-servlet
+	implementation 'com.navercorp.lucy:lucy-xss-servlet:latest.integration'
+	implementation 'com.navercorp.lucy:lucy-xss:latest.integration'
+
 	// Essential Spring Boot Implementations: Main
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'
