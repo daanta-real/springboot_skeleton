@@ -20,11 +20,21 @@ public class WebConfig implements WebMvcConfigurer {
 
     //Lucy Xss filter 적용
     @Bean
-    public FilterRegistrationBean<XssEscapeServletFilter> getFilterRegistrationBean(){
-        FilterRegistrationBean<XssEscapeServletFilter> registrationBean = new FilterRegistrationBean<>();
+    public FilterRegistrationBean xssFilterBean(){
+        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(new XssEscapeServletFilter());
-        registrationBean.setOrder(1);
-        registrationBean.addUrlPatterns("/*");
+        registrationBean.setOrder(Ordered.LOWEST_PRECEDENC);
+        registrationBean.addUrlPatterns("*.do", "*.jsp");
         return registrationBean;
     }
+
+    @Bean
+    public FilterRegistrationBean<XssEscapeServletFilter> xssEscapeServletFilterRegistrationBean() {
+        FilterRegistrationBean<XssEscapeServletFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new XssEscapeServletFilter());
+        registrationBean.addUrlPatterns("/*");
+        registrationBean.setName("xssEscapeServletFilter");
+        return registrationBean;
+    }
+
 }
