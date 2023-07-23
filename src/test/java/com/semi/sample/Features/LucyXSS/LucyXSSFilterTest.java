@@ -32,7 +32,8 @@ public class LucyXSSFilterTest {
 
     /**
      * [2] FILTERING HTML
-     * To handle the complex HTML String but just prevent XSS attack, use "XssFilter".
+     * To handle the complex HTML String in the situation it is allowed
+     * but just want to prevent XSS attack, use "XssFilter".
      * XssFilter can handle two types: DOM(parse after whole xml has been loaded), SAX(parse line by line)
      * Before using any of these, you must make "lucy-xss-superset-sax.xml" file at the classpath root directory.
      * <p>
