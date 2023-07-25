@@ -37,7 +37,7 @@
 
 
 
-    <!-- DEFENDER --%>
+    <!-- DEFENDER -->
     <!-- default defender 선언, 필터링 시 지정한 defender가 없으면 여기 정의된 default defender를 사용해 필터링 한다. -->
     <default>
         <defender>xssPreventerDefender</defender>
@@ -61,21 +61,31 @@
 
 
 
-    <!-- url 별 필터링 룰 선언 -->
+    <!--
+    필터링 제외 url 설정
+    XSS 필터링을 제외할 예외URL을 등록하는 곳이다.
+    URL을 disable=true로 등록하면, 해당 URL로 들어오는 모든 패러미터의 필터링을 중지한다.
+    필터링이 아예 필요 없을 경우에만 신중한 검토 후에 셋팅하라.
+
+    1. url disable의 디폴트값은 false(=필터링 on)이다.
+       사용자가 true로 설정함으로써 유효한 동작(=필터링 off)을 하게 된다.
+        1) 아래처럼 false로 먹이지 말라. 이미 false가 기본값이라 무의미하니까 하지 말라.
+            <url-rule>
+                <url disable="false">/disableUrl2.do</url>
+            </url-rule>
+        2) 아래처럼 url disable true로 먹인 url은 들어오는 모든 파라메터의 필터링을 생략한다.
+            <url-rule>
+                <url disable="true">/disableUrl1.do</url>
+            </url-rule>
+
+
+    -->
     <url-rule-set>
 
-        <!-- url disable이 true이면 지정한 url 내의 모든 파라메터는 필터링 되지 않는다. -->
-        <url-rule>
-            <url disable="true">/disableUrl1.do</url>
-        </url-rule>
 
-        <!-- url disable이 false인 설정은 기본이기 때문에 불필요하다. 아래와 같은 불필요한 설정은 하지 않는다.-->
-        <url-rule>
-            <url disable="false">/disableUrl2.do</url>
-        </url-rule>
-
-        <!-- url disable이 true이면 지정한 url 내의 모든 파라메터가 필터링 되지 않기 때문에 <params> 로 선언한 설정은 적용되지 않는다.
-               아래와 같은 불필요한 설정은 하지 않는다. -->
+        3.
+        url disable이 true이면 지정한 url 내의 모든 파라메터가 필터링 되지 않기 때문에 params 태그로 선언한 설정은 적용되지 않는다.
+        즉 아래와 같은 불필요한 설정은 하지 않는다.
         <url-rule>
             <url disable="true">/disableUrl3.do</url>
             <params>
@@ -88,12 +98,12 @@
             </params>
         </url-rule>
 
-        <!-- url disable이 false인 설정은 기본이기 때문에 불필요하다. <params> 선언한 설정은 적용이 된다.-->
+        url disable이 false인 설정은 기본이기 때문에 불필요하다. <params> 선언한 설정은 적용이 된다.
         <url-rule>
             <url disable="false">/disableUrl4.do</url>
             <params>
-                <!-- disableUrl4.do 의 query 파라메터와 prefix4로 시작하는 파라메터들은 필터링 되지 않는다.
-                        usePrefix가 false, useDefender가 true인 설정은 기본이기 때문에 불필요하다. -->
+                disableUrl4.do 의 query 파라메터와 prefix4로 시작하는 파라메터들은 필터링 되지 않는다.
+                usePrefix가 false, useDefender가 true인 설정은 기본이기 때문에 불필요하다.
                 <param name="query" useDefender="false" />
                 <param name="prefix1" usePrefix="true" />
                 <param name="prefix2" usePrefix="false" useDefender="false" />
@@ -133,5 +143,7 @@
             </params>
         </url-rule>
     </url-rule-set>
+
+
 
 </config>
