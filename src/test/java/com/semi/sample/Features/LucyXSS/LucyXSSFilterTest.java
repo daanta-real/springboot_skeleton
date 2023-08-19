@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LucyXSSFilterTest {
 
     /**
-     * [1] PREVENTING HTML
+     * [1] PREVENTING ANY HTML
      * To totally prevent any HTML, just use "XssPreventer".
      * 1) .escape(): Escape all HTML chars for preventing applying HTML
      * 2) .unescape(): Make all HTML chars for applying HTML
@@ -31,7 +31,7 @@ public class LucyXSSFilterTest {
     }
 
     /**
-     * [2] FILTERING HTML
+     * [2] ACCEPTS HTML BUT FILTER IT
      * To handle the complex HTML String in the situation it is allowed
      * but just want to prevent XSS attack, use "XssFilter".
      * XssFilter can handle two types: DOM(parse after whole xml has been loaded), SAX(parse line by line)
