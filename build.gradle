@@ -1,30 +1,179 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.0.5'
-	id 'io.spring.dependency-management' version '1.1.0'
+	id 'war'
+	id 'org.springframework.boot' version '3.2.0'
+	id 'io.spring.dependency-management' version '1.1.4'
 }
 
-group = 'com.semi'
+group = 'com.daanta'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
 
+java {
+	sourceCompatibility = '20'
+}
+
+ext {
+	lombokVersion = '1.18.30'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
 
 repositories {
+	// 최소
 	mavenCentral()
+	// 추가
+	mavenLocal()
+	gradlePluginPortal()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+	maven { url "https://plugins.gradle.org/m2/" }
+	// 아래는 각종 미러사이트들. 필요 시 주석 해제
+	maven { url 'https://repo.maven.apache.org/maven2/' }
+	maven { url 'https://plugins.gradle.org/m2/' }
+	maven { url 'https://maven.aliyun.com/repository/google/' }
+	maven { url 'https://maven.aliyun.com/repository/public/' }
+	maven { url 'https://maven.aliyun.com/repository/spring/' }
+	maven { url 'https://maven.aliyun.com/repository/gradle-plugin/' }
+	maven { url 'https://maven.aliyun.com/repository/spring-plugin/' }
+	maven { url 'https://maven.xillio.com/artifactory/libs-release/' }
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
-	compileOnly 'org.projectlombok:lombok'
-	compileOnly 'javax.servlet:javax.servlet-api:3.1.0'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
 
+
+
+	/**
+	 * JAVA ESSENTIALS
+	 */
+	// 로깅 어노테이션을 쓰기 위한 롬복
+	// LOMBOK은 사용 전제조건이 까다로우므로 사용 시 주의.
+	// 1. Lombok은 implement 시 최신판의 버전 숫자를 필히 명기해줘야 한다.
+	// 2. IntelliJ에서 플러그인을 기 설치한 상태여야 하며 셋팅에서 Annotation Processor를 체크, 활성해줘야 한다.
+	// 3. 웬만하면 아래 형태에서처럼 네 형태 다 수동으로 지정해 줘야 에러가 잘 안 난다.
+	// https://mvnrepository.com/artifact/org.projectlombok/lombok
+	def lombokDependency = "org.projectlombok:lombok:${lombokVersion}"
+	compileOnly lombokDependency
+	testCompileOnly lombokDependency
+	annotationProcessor lombokDependency
+	testAnnotationProcessor lombokDependency
+
+
+
+	/**
+	 * LOGGING
+	 */
+	// 1. Bridge
+	// https://mvnrepository.com/artifact/org.slf4j/jcl-over-slf4j
+	implementation 'org.slf4j:jcl-over-slf4j:latest.integration'
+	// 2. Slf4j API
+	// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+	implementation 'org.slf4j:slf4j-api:latest.integration'
+	// 3. Binding
+	// https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+	implementation 'ch.qos.logback:logback-classic:latest.integration'
+	// 4. Slf4j's implemented object (=logback)
+	// https://mvnrepository.com/artifact/ch.qos.logback/logback-core
+	implementation 'ch.qos.logback:logback-core:latest.integration'
+
+
+
+	/**
+	 * TESTING (JUnit)
+	 */
+	// JUnit
+	// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
+	// https://mvnrepository.com/artifact/org.junit/junit-bom
+	testImplementation 'org.junit.jupiter:junit-jupiter:latest.integration'
+	testImplementation platform('org.junit:junit-bom:latest.integration')
+
+
+
+	/**
+	 * SPRING BOOT
+	 */
+	// Essential Spring Boot Implementations: Main
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+	implementation 'org.springframework.boot:spring-boot-starter-web:latest.integration'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:latest.integration'
+
+	// Essential Spring Boot Implementations: Tesing
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
+	implementation 'org.springframework.boot:spring-boot-devtools:latest.integration'
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-tomcat
+	implementation 'org.springframework.boot:spring-boot-starter-tomcat:latest.integration'
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:latest.integration'
+
+	// Essential Spring Boot Implementations: Security
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+	implementation 'org.springframework.boot:spring-boot-starter-security:latest.integration'
+
+
+
+	/**
+	 * DBMS
+	 */
+	// MyBatis for Spring Boot
+	// https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:latest.integration'
+	// It makes you check the the complete queries for every querying.
+	// https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1
+	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:latest.integration'
+	// (선택) H2 database - for testing only
+	// https://mvnrepository.com/artifact/com.h2database/h2
+//	developmentOnly 'com.h2database:h2:latest.integration'
+	// (선택) PostgreSQL
+	// https://mvnrepository.com/artifact/org.postgresql/postgresql
+//	implementation 'org.postgresql:postgresql:latest.integration'
+	// (선택) MariaDB
+//	implementation 'org.mariadb.jdbc:mariadb-java-client'
+
+
+
+
+	/**
+	 * UTILITIES - STRING
+	 */
+	// String 취급을 쉽게 해주는 Apache Commons Lang
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+	implementation 'org.apache.commons:commons-lang3:latest.integration'
+	// 파싱 등을 처리하기 위해 영입한 Apache Commons Text
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-text
+	implementation 'org.apache.commons:commons-text:latest.integration'
+	// ※ ObjectMapper를 쓰거나 JSON 처리를 하기 위한 Jackson은 Java 17부터 JVM 내장이므로 implement하지 않는다.
+
+
+
+	/**
+	 * PLUGINS
+	 */
+	// HTML 크롤링에 쓰이는 HTML 긁어오기 프로그램 JSoup
+	// https://mvnrepository.com/artifact/org.jsoup/jsoup
+	implementation 'org.jsoup:jsoup:latest.integration'
+	// 스케쥴러 Quartz
+	// https://mvnrepository.com/artifact/org.quartz-scheduler/quartz
+	implementation 'org.quartz-scheduler:quartz:latest.integration'
+
+
+
+	/**
+	 * STILL UNDER REVIEW
+	 */
+	// XSS 공격을 방어하기 위한 LUXY XSS 서블릿
+	// https://mvnrepository.com/artifact/com.navercorp.lucy/lucy-xss-servlet
+//	implementation 'com.navercorp.lucy:lucy-xss-servlet:latest.integration'
+//	implementation 'com.navercorp.lucy:lucy-xss:latest.integration'
+	// HTTP REQUEST 등을 처리하기 위한 OKHTTP
+	// https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
+//	implementation 'com.squareup.okhttp3:okhttp:latest.integration'
+
+
+
+}
 
 tasks.named('test') {
 	useJUnitPlatform()
