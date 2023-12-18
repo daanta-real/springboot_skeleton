@@ -3,8 +3,17 @@
 <config xmlns="http://www.navercorp.com/lucy-xss-servlet">
 
 
-
-    <!-- XSS FILTER 등록 -->
+    <!--
+    REGISTERING(LOADING) XSS FILTER
+    Lucy XSS Filter에서 제공하는 필터는 총 3가지이다.
+    1. XssPreventer: prevent all HTML usage.
+       1) .escape(): Escape all HTML chars for preventing applying HTML
+       2) .unescape(): Make all HTML chars for applying HTML
+    2. XssSaxFilter:
+    3. XssFilter:
+    이중에서 여기에 원하는 필터를 정의하여 불러 와야, 이하 옵션에서 이용할 수 있다.
+    반대로 여기에 정의하지 않는다면 이하 옵션에서 이용할 수 없다.
+    -->
     <defenders>
 
         <!-- XssPreventer 등록 -->
@@ -36,13 +45,11 @@
     </defenders>
 
 
-
     <!-- DEFENDER -->
     <!-- default defender 선언, 필터링 시 지정한 defender가 없으면 여기 정의된 default defender를 사용해 필터링 한다. -->
     <default>
         <defender>xssPreventerDefender</defender>
     </default>
-
 
 
     <!-- GLOBAL FILTERING RULES -->
@@ -58,7 +65,6 @@
             <param name="globalPrefixParameter3" usePrefix="false" useDefender="false" />
         </params>
     </global>
-
 
 
     <!--
@@ -98,7 +104,7 @@
             </params>
         </url-rule>
 
-        url disable이 false인 설정은 기본이기 때문에 불필요하다. <params> 선언한 설정은 적용이 된다.
+        url disable이 false인 설정은 기본이기 때문에 불필요하다. params 태그로 선언한 설정은 적용이 된다.
         <url-rule>
             <url disable="false">/disableUrl4.do</url>
             <params>
@@ -123,7 +129,7 @@
             <params>
                 <param name="url1Parameter" useDefender="false" />
                 <param name="url1PrefixParameter" usePrefix="true" useDefender="false" />
-                <param name="globalParameter"/>
+                <param name="globalParameter" />
             </params>
         </url-rule>
 
@@ -143,7 +149,6 @@
             </params>
         </url-rule>
     </url-rule-set>
-
 
 
 </config>
