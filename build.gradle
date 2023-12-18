@@ -128,7 +128,7 @@ dependencies {
 //	developmentOnly 'com.h2database:h2:latest.integration'
 	// (선택) PostgreSQL
 	// https://mvnrepository.com/artifact/org.postgresql/postgresql
-//	implementation 'org.postgresql:postgresql:latest.integration'
+	implementation 'org.postgresql:postgresql:latest.integration'
 	// (선택) MariaDB
 //	implementation 'org.mariadb.jdbc:mariadb-java-client'
 
@@ -165,12 +165,18 @@ dependencies {
 	 */
 	// XSS 공격을 방어하기 위한 LUXY XSS 서블릿
 	// https://mvnrepository.com/artifact/com.navercorp.lucy/lucy-xss-servlet
-//	implementation 'com.navercorp.lucy:lucy-xss-servlet:latest.integration'
-//	implementation 'com.navercorp.lucy:lucy-xss:latest.integration'
+	implementation 'com.navercorp.lucy:lucy-xss-servlet:latest.integration'
+	implementation 'com.navercorp.lucy:lucy-xss:latest.integration'
 	// HTTP REQUEST 등을 처리하기 위한 OKHTTP
 	// https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
 //	implementation 'com.squareup.okhttp3:okhttp:latest.integration'
 
+
+
+	/**
+	 * SWAGGER
+	 */
+	implementation 'io.swagger.core.v3:swagger-annotations:latest.integration'
 
 
 }
