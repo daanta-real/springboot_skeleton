@@ -113,6 +113,16 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security:latest.integration'
 
 
+	/**
+	 * SPRING CACHE - USING EHCACHE
+	 */
+	// Spring Context is also required, which already has been included in Spring Boot Starter Web.
+	// https://mvnrepository.com/artifact/org.ehcache/ehcache
+	implementation 'org.ehcache:ehcache:latest.integration'
+	// https://mvnrepository.com/artifact/org.springframework/spring-context-support
+	implementation 'org.springframework:spring-context-support:6.1.2'
+
+
 
 	/**
 	 * DBMS
@@ -149,7 +159,7 @@ dependencies {
 
 
 	/**
-	 * PLUGINS
+	 * UTILITIES - ETC
 	 */
 	// HTML 크롤링에 쓰이는 HTML 긁어오기 프로그램 JSoup
 	// https://mvnrepository.com/artifact/org.jsoup/jsoup
