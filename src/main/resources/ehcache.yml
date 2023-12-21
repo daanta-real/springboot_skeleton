@@ -1,0 +1,39 @@
+# EHCACHE CONFIG FILE FOR SPRING CACHE
+
+# Global default. This "default" setting must be set for run EhCache.
+default:
+
+  # Caching eternally without any life limit.
+  # But even with this the all cached data will be lost on turning off the server,
+  # unless you didn't set caching data saving type as pure disk-based.
+  # And think twice if you are to set eternal to true,
+  # as that has a possibility to make the cache data infinitely.
+  eternal: false
+
+  # Cached data lifespan.
+  # If you set all two to 0, it's same as not setting any cache at all.
+  # 1) timeToLiveSeconds(TTL): Absolute lifespan. Delete the cache after a specific time from the last creation.
+  timeToLiveSeconds: 120
+  # 2) timeToIdleSeconds(TTI): Relative lifespan. Delete the cache after a specific time from the last usage.
+  timeToIdleSeconds: 60
+
+  # Newly cached data is handled with First In Last Out rule.
+  # And the order is heap first, disk next.
+  # If you have a plan to use disk cache, you should consider that
+  # the disk cache can be the bottleneck of processing speed easily.
+  maxEntriesLocalHeap: 1000
+  maxEntriesLocalDisk: 10000
+
+  # Considering the situation the entry pool is full,
+  # you can choose the criteria selecting firstly removed among cache data.
+  # EhCache provides three options below.
+  # 1. LRU(Least Recently Used) ★
+  # 2. LFU(Least Frequently Used)
+  # 3. FIFO(First In First Out)
+  memoryStoreEvictionPolicy: LFU
+
+  # transactionalMode: off
+
+
+  # diskSpoolBufferSizeMB="20000"
+
