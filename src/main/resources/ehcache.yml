@@ -3,6 +3,8 @@
 # Global default. This "default" setting must be set for run EhCache.
 default:
 
+  name: defaultCache
+
   # Caching eternally without any life limit.
   # But even with this the all cached data will be lost on turning off the server,
   # unless you didn't set caching data saving type as pure disk-based.
