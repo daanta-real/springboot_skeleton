@@ -2,11 +2,13 @@ package com.semi.main;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class mainController {
+@RequestMapping("/")
+public class MainController {
 
-	@GetMapping("/")
+	@GetMapping("")
 	public String index() {
 		return "index.html";
 	}
