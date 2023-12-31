@@ -33,19 +33,22 @@ fn.getSampleList = async function() {
 	};
 
 	// fetch 실행
-	fetch("/sample/list", {
-		method: "POST",
-		headers: headers,
-		data: JSON.stringify(params)
-	})
-	.then(response => response.json()) // JSON 형태로만 돌아올 것을 가정
-	.then(data => {
+	try {
+
+		// 강제 동기타입 실행
+		const response = await fetch("/sample/list", {
+			method: "POST",
+			headers: headers,
+			data: JSON.stringify(params)
+		});
+
+		// JSON 형태로만 돌아올 것을 가정
+		const data = response.json()
 		// RESPONSE 접수 후 처리부
 		console.log(data);
-	})
-	.catch(e => {
-		console.error("통신 실패\,", e);
-	});
+	} catch(error) {
+		console.error("통신 실패\,", error);
+	}
 
 }
 
