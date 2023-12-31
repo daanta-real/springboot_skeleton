@@ -6,11 +6,11 @@
 	<title>테스트</title>
 </head>
 <body>
-	<input type="button" value="swagger(API명세서)" onclick="location.href = '/swagger-ui/index.html';">
-	<input type="button" value="로그인페이지" onclick="location.href = '/user/login.html';">
-	<input type="button" value="카카오맵테스트" onclick="location.href = '/map/map.html';">
-	<input type="button" value="백앤드호출(샘플)" onclick="getSampleList();">
-	<input type="button" value="모바일체크" onclick="deviceSpecificCode();">
+	<input type="button" value="Swagger (API 명세서)" onclick="location.href = '/swagger-ui/index.html';">
+	<input type="button" value="로그인 페이지" onclick="location.href = '/user/login.html';">
+	<input type="button" value="카카오맵 테스트" onclick="location.href = '/map/map.html';">
+	<input type="button" value="백앤드 호출(샘플)" onclick="getSampleList();">
+	<input type="button" value="모바일 여부 체크" onclick="deviceSpecificCode();">
 </body>
 <script>
 
@@ -24,26 +24,27 @@ const fn = {};
 // samplelist는 '무엇의' 샘플리스트임? 변수명에 해당 단어 접두어로 추가필요
 fn.getSampleList = async function() {
 
-	// json 형식으로 데이터 set
-	var params = {
+	// DATAS
+	const params = {
 		id: 5
+	};
+	const headers = {
+		"content-type": "application/json;charset=utf-8"
 	};
 
 	// fetch 실행
 	fetch("/sample/list", {
 		method: "POST",
-		headers: {
-			"content-type": "application/json;charset=utf-8"
-		},
+		headers: headers,
 		data: JSON.stringify(params)
 	})
-	.then(response => response.json())
-	.then(data => { // RESPONSE 접수 후 처리부
+	.then(response => response.json()) // JSON 형태로만 돌아올 것을 가정
+	.then(data => {
+		// RESPONSE 접수 후 처리부
 		console.log(data);
 	})
-	.catch(error => {
-		console.error(error);
-		console.log("통신 실패");
+	.catch(e => {
+		console.error("통신 실패\,", e);
 	});
 
 }
@@ -67,7 +68,7 @@ fn.isMobile = function() {
 fn.deviceSpecificCode = function() {
 
 	// 모바일이 아닐 경우
-	if(!isMobile()) {
+	if(!fn.isMobile()) {
 		alert("This is PC environment.");
 		return;
 	}
