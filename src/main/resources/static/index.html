@@ -1,88 +1,95 @@
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>테스트</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>테스트</title>
 </head>
 <body>
-	<input type="button" value="swagger(API명세서)" onclick="javascript:moveSwagger();">
-	<input type="button" value="로그인페이지" onclick="javascript:loginPageMove();">
-	<input type="button" value="카카오맵테스트" onclick="javascript:kakaomapPage();">
-	<input type="button" value="백앤드호출(샘플)" onclick="javascript:sampleList();">
-	<input type="button" value="모바일체크" onclick="javascript:isMobileButton();">
+	<input type="button" value="swagger(API명세서)" onclick="location.href = '/swagger-ui/index.html';">
+	<input type="button" value="로그인페이지" onclick="location.href = '/user/login.html';">
+	<input type="button" value="카카오맵테스트" onclick="location.href = '/map/map.html';">
+	<input type="button" value="백앤드호출(샘플)" onclick="getSampleList();">
+	<input type="button" value="모바일체크" onclick="deviceSpecificCode();">
 </body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-function loginPageMove(){
-	location.href = '/user/login.html';
-}
 
-function moveSwagger(){
-	location.href = '/swagger-ui/index.html';
-}
+// 사이트 내의 모든 공통처리부를 패키징할 최상위 객체
+const fn = {};
 
-function kakaomapPage(){
-	location.href = '/map/map.html';
-}
 
-function sampleList() {
-	  // json 형식으로 데이터 set
+
+// sync(동기) 방식으로 작동하도록 설정하였다.
+// 만약 비동기로 처리하고 싶으면 async, await 키워드만 빼면 됨.
+// samplelist는 '무엇의' 샘플리스트임? 변수명에 해당 단어 접두어로 추가필요
+fn.getSampleList = async function() {
+
+	// json 형식으로 데이터 set
 	var params = {
-		    id: 5
-		};
+		id: 5
+	};
 
-		$.ajax({
-		    type: "POST",
-		    url: "/sample/list",
-		    contentType: "application/json", // Content-Type 헤더 설정
-		    data: JSON.stringify(params),    // JSON 데이터를 문자열로 변환하여 전송
-		    success: function(res) {
-		        console.log(res);
-		    },
-		    error: function(XMLHttpRequest, textStatus, errorThrown) {
-		        alert("통신 실패.");
-		    }
-		});
+	// fetch 실행
+	fetch("/sample/list", {
+		method: "POST",
+		headers: {
+			"content-type": "application/json;charset=utf-8"
+		},
+		data: JSON.stringify(params)
+	})
+	.then(response => response.json())
+	.then(data => { // RESPONSE 접수 후 처리부
+		console.log(data);
+	})
+	.catch(error => {
+		console.error(error);
+		console.log("통신 실패");
+	});
+
 }
 
-//모바일 디바이스 여부를 확인하는 함수
-function isMobile() {
-    var mobileKeyWords = ['Android', 'iPhone', 'iPod', 'BlackBerry', 'Windows Phone'];
-    for (var i in mobileKeyWords) {
-        if (navigator.userAgent.match(mobileKeyWords[i]) != null) {
+
+
+// 모바일 디바이스 여부를 확인하는 함수
+fn.isMobile = function() {
+	const mobileKeyWords = ['Android', 'iPhone', 'iPod', 'BlackBerry', 'Windows Phone'];
+	for (const keyword of mobileKeyWords) {
+        if (navigator.userAgent.match(keyword) != null) {
             return true;
         }
     }
     return false;
 }
-function isMobileButton() {
-	// 모바일 디바이스일 경우와 아닐 경우의 분기 처리
-	if (isMobile()) {
-	    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-	    // 안드로이드 체크
-	    if (userAgent.match(/Android/i)) {
-	        // 안드로이드일 경우 실행할 코드 작성
-	        alert("This is Android mobile device.");
-	    }
-	    // 아이폰 체크
-	    else if (userAgent.match(/iPhone|iPod/i)) {
-	        // 아이폰일 경우 실행할 코드 작성
-	        alert("This is iPhone mobile device.");
-	    }
-	    // 아이패드 체크
-	    else if (userAgent.match(/iPad/i)) {
-	        // 아이패드일 경우 실행할 코드 작성
-	        alert("This is iPad mobile device.");
-	    }
-	    // 기타 모바일 디바이스 체크
-	    else {
-	        // 기타 모바일 디바이스일 경우 실행할 코드 작성
-	        alert("This is other mobile device.");
-	    }
-	} else {
-	    // PC 환경일 경우 실행할 코드 작성
-	    alert("This is PC environment.");
+
+
+
+// 모바일 디바이스일 경우와 아닐 경우의 분기 처리
+fn.deviceSpecificCode = function() {
+
+	// 모바일이 아닐 경우
+	if(!isMobile()) {
+		alert("This is PC environment.");
+		return;
 	}
-}
+
+	// 모바일일 경우
+	const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+	switch (true) {
+		case userAgent.match(/Android/i):
+			alert("This is Android mobile device.");
+			break;
+		case userAgent.match(/iPhone|iPod/i):
+			alert("This is iPhone mobile device.");
+			break;
+		case userAgent.match(/iPad/i):
+			alert("This is iPad mobile device.");
+			break;
+		default:
+			alert("This is other mobile device.");
+	}
+
+};
+
 
 
 </script>
