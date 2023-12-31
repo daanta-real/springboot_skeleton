@@ -44,8 +44,10 @@ fn.getSampleList = async function() {
 
 		// JSON 형태로만 돌아올 것을 가정
 		const data = response.json()
+
 		// RESPONSE 접수 후 처리부
 		console.log(data);
+
 	} catch(error) {
 		console.error("통신 실패\,", error);
 	}
