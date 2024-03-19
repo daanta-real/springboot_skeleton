@@ -5,9 +5,6 @@ plugins {
 	id 'io.spring.dependency-management' version 'latest.release'
 }
 
-group = 'com.daanta'
-version = '0.0.1-SNAPSHOT'
-
 java {
 	sourceCompatibility = '21'
 }
@@ -116,13 +113,14 @@ dependencies {
 	/**
 	 * SPRING CACHE - USING EHCACHE
 	 */
-	// TODO: Spring Context is also required, which already has been included in Spring Boot Starter Web. ????
+	// Spring Cache base libraries
 	// https://mvnrepository.com/artifact/org.springframework/spring-context
 	implementation 'org.springframework:spring-context:latest.integration'
 	// https://mvnrepository.com/artifact/org.springframework/spring-context-support
 	implementation 'org.springframework:spring-context-support:latest.integration'
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-cache
 	implementation 'org.springframework.boot:spring-boot-starter-cache:latest.integration'
+	// Main cache manager = EhCache
 	// https://mvnrepository.com/artifact/org.ehcache/ehcache
 	implementation 'org.ehcache:ehcache:latest.integration'
 
