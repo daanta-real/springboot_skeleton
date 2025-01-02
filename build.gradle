@@ -10,7 +10,7 @@ java {
 }
 
 ext {
-	lombokVersion = '1.18.30'
+	lombokVersion = '1.18.36'
 }
 
 configurations {
@@ -25,18 +25,18 @@ repositories {
 	// 추가
 	mavenLocal()
 	gradlePluginPortal()
-	maven { url 'https://repo.spring.io/milestone' }
-	maven { url 'https://repo.spring.io/snapshot' }
-	maven { url "https://plugins.gradle.org/m2/" }
+	maven { url = uri("https://repo.spring.io/milestone") }
+	maven { url = uri("https://repo.spring.io/snapshot") }
+	maven { url = uri("https://plugins.gradle.org/m2/") }
 	// 아래는 각종 미러사이트들. 필요 시 주석 해제
-	maven { url 'https://repo.maven.apache.org/maven2/' }
-	maven { url 'https://plugins.gradle.org/m2/' }
-	maven { url 'https://maven.aliyun.com/repository/google/' }
-	maven { url 'https://maven.aliyun.com/repository/public/' }
-	maven { url 'https://maven.aliyun.com/repository/spring/' }
-	maven { url 'https://maven.aliyun.com/repository/gradle-plugin/' }
-	maven { url 'https://maven.aliyun.com/repository/spring-plugin/' }
-	maven { url 'https://maven.xillio.com/artifactory/libs-release/' }
+//	maven { url = uri("https://repo.maven.apache.org/maven2/") }
+//	maven { url = uri("https://plugins.gradle.org/m2/") }
+//	maven { url = uri("https://maven.aliyun.com/repository/google/") }
+//	maven { url = uri("https://maven.aliyun.com/repository/public/") }
+//	maven { url = uri("https://maven.aliyun.com/repository/spring/") }
+//	maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin/") }
+//	maven { url = uri("https://maven.aliyun.com/repository/spring-plugin/") }
+//	maven { url = uri("https://maven.xillio.com/artifactory/libs-release/") }
 }
 
 dependencies {
